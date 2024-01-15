@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Board Game Recommendations</title>
+</head>
+<body>
+    <h1>Find Board Game Recommendations</h1>
+    <input type="text" id="gameInput">
+    <button onclick="getRecommendations()">Get Recommendations</button>
+
+    <div id="recommendations"></div>
+
+    <script>
+        function getRecommendations() {
+            var gameName = document.getElementById('gameInput').value;
+            fetch(`/recommend?game=${encodeURIComponent(gameName)}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Process and display the recommendations
+                    document.getElementById('recommendations').innerHTML = JSON.stringify(data);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
